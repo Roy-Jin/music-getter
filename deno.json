@@ -1,0 +1,14 @@
+{
+  "tasks": {
+    "run": "deno run --sloppy-imports -A main.js",
+    "build": "deno compile -A --sloppy-imports --output=dist/mg main.js"
+  },
+  "imports": {
+    "@/": "./",
+    "@command/": "./command/",
+    "@path": "jsr:@std/path",
+    "@chalk": "jsr:@nothing628/chalk",
+    "@progress": "jsr:@ryweal/progress",
+    "@command": "jsr:@cliffy/command@1.0.0-rc.8"
+  }
+}
