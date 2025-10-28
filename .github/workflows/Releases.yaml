@@ -1,0 +1,192 @@
+name: Build and Release Deno Application
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  PROJECT_NAME: mg
+
+jobs:
+  build:
+    name: Build and Package
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: 'latest'
+
+    - name: Install compression tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y zip xz-utils
+
+    - name: Create build script
+      run: |
+        cat > build.js << 'EOF'
+        const targets = [
+          { name: 'x86_64-unknown-linux-gnu', friendly: 'linux-x64', compress: 'tar.xz' },
+          { name: 'aarch64-unknown-linux-gnu', friendly: 'linux-arm64', compress: 'tar.xz' },
+          { name: 'x86_64-pc-windows-msvc', friendly: 'windows-x64', compress: 'zip' },
+          { name: 'x86_64-apple-darwin', friendly: 'darwin-x64', compress: 'tar.gz' },
+          { name: 'aarch64-apple-darwin', friendly: 'darwin-arm64', compress: 'tar.gz' },
+        ];
+
+        console.log('Building multi-platform binaries...');
+
+        try {
+          await Deno.mkdir('dist', { recursive: true });
+        } catch (e) {
+        }
+
+        for (const target of targets) {
+          console.log(`Building ${target.name}...`);
+          
+          const binaryName = `mg-${target.friendly}`;
+          const outputName = target.name.includes('windows') ? `${binaryName}.exe` : binaryName;
+          const binaryPath = `dist/${outputName}`;
+          
+          try {
+            const buildCmd = new Deno.Command('deno', {
+              args: [
+                'compile',
+                '--allow-all',
+                '--sloppy-imports',
+                '--target', target.name,
+                '--output', binaryPath,
+                'main.js'
+              ]
+            });
+            
+            const buildProcess = await buildCmd.output();
+            
+            if (buildProcess.code === 0) {
+              console.log(`Success: ${target.name}`);
+              
+              await createCompressedPackage(target, binaryName, binaryPath);
+              
+            } else {
+              const errorMsg = new TextDecoder().decode(buildProcess.stderr);
+              console.error(`Failed: ${target.name}`, errorMsg);
+            }
+          } catch (error) {
+            console.error(`Error: ${target.name}`, error.message);
+          }
+        }
+
+        console.log('All platforms built successfully!');
+
+        async function createCompressedPackage(target, binaryName, binaryPath) {
+          const compressedName = `dist/${binaryName}.${target.compress}`;
+          
+          try {
+            if (target.compress === 'tar.xz') {
+              const tarCmd = new Deno.Command('tar', {
+                args: ['-cJf', compressedName, '-C', 'dist', `${binaryName}`]
+              });
+              await tarCmd.output();
+              
+            } else if (target.compress === 'tar.gz') {
+              const tarCmd = new Deno.Command('tar', {
+                args: ['-czf', compressedName, '-C', 'dist', `${binaryName}`]
+              });
+              await tarCmd.output();
+              
+            } else if (target.compress === 'zip') {
+              const zipCmd = new Deno.Command('zip', {
+                args: ['-j', compressedName, binaryPath]
+              });
+              await zipCmd.output();
+            }
+            
+            console.log(`Package created: ${compressedName}`);
+            
+            try {
+              await Deno.remove(binaryPath);
+            } catch (e) {
+            }
+            
+          } catch (error) {
+            console.error(`Compression failed:`, error.message);
+          }
+        }
+        EOF
+
+    - name: Build for all platforms
+      run: deno run --allow-run --allow-read --allow-write --allow-env build.js
+
+    - name: List built files
+      run: ls -la dist/
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-binaries
+        path: dist/
+        retention-days: 1
+
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: release-binaries
+        path: dist/
+
+    - name: List files for release
+      run: ls -la dist/
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ github.ref_name }}
+        name: Release ${{ github.ref_name }}
+        body: |
+          ## ${{ github.ref_name }}
+          
+          ### Download
+          Please download the appropriate package for your operating system:
+          
+          - **Windows**: Download `.zip` file, extract and run the `.exe`
+          - **Linux**: Download `.tar.xz` file, extract and run the binary
+          - **macOS**: Download `.tar.gz` file, extract and run the binary
+          
+          ### Usage
+          1. Download the package for your platform
+          2. Extract the files
+          3. Run the binary in your terminal
+          
+          ### Supported Platforms
+          - Windows x64 (.zip)
+          - Linux x64 (.tar.xz)
+          - Linux ARM64 (.tar.xz)
+          - macOS Intel (.tar.gz)
+          - macOS Apple Silicon (.tar.gz)
+          
+          ### Verification
+          After downloading, you can verify the file integrity:
+          ```bash
+          # Linux/macOS
+          tar -tf your-downloaded-file.tar.xz
+          
+          # Windows
+          # Use built-in extraction or tools like 7-Zip
+          ```
+        draft: false
+        prerelease: false
+        files: |
+          dist/*.tar.xz
+          dist/*.tar.gz
+          dist/*.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
