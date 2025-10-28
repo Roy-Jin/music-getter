@@ -6,13 +6,13 @@ import chalk from "@chalk";
 export default function playlist(_com) {
     _com
         .command("playlist <keyword>")
-        .description("Get a song playlist resource.")
-        .option("-l, --lyric ", "Add the lyrics for all song resource.")
-        .option("-c, --cover [pixel]", "Add the cover for all song resource.")
-        .option("-o, --output <path>", "Specify output relative directory.", {
+        .description("Get the entire playlist resource.")
+        .option("-l, --lyric ", "Include lyrics for all songs.")
+        .option("-c, --cover [size]", "Include cover image for all songs.")
+        .option("-o, --output <path>", "Custom output directory.", {
             default: "./"
         })
-        .option("-s, --server <source>", "Specify the server source to download.", {
+        .option("-s, --server <source>", "Specify source platform.", {
             default: "netease"
         })
         .action(async (options, keyword) => {

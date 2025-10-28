@@ -4,15 +4,15 @@ import chalk from "@chalk";
 export default function list(_com) {
     _com
         .command("ls, list <keyword>")
-        .description("list a playlist resource.")
-        .option("-s, --server <source>", "Specify the server source to list.", {
-            default: "netease"
-        })
-        .option("-t, --type <type>", "Specify the type of resource to list.", {
+        .description("List resources from a specific type.")
+        .option("-t, --type <type>", "Resource type.", {
             default: "playlist"
         })
         .meta("Supported types", chalk.green("playlist, album, artist"))
-        .option("-c, --check", "Check the song resource is available or not.")
+        .option("-c, --check", "Verify resource availability.")
+        .option("-s, --server <source>", "Specify source platform.", {
+            default: "netease"
+        })
         .action(async (options, keyword) => {
             const { server, check, type } = options;
 

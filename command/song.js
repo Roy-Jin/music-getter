@@ -7,12 +7,12 @@ export default function song(_com) {
     _com
         .command("song <keyword>")
         .description("Get single song resource.")
-        .option("-l, --lyric ", "Add the lyrics for this song resource.")
-        .option("-c, --cover [pixel]", "Add the cover for this song resource.")
-        .option("-o, --output <path>", "Specify output relative directory.", {
+        .option("-l, --lyric ", "Include lyrics file.")
+        .option("-c, --cover [size]", "Include cover image.")
+        .option("-o, --output <path>", "Custom output directory.", {
             default: "./"
         })
-        .option("-s, --server <source>", "Specify the server source to download.", {
+        .option("-s, --server <source>", "Specify music platform.", {
             default: "netease"
         })
         .action(async (options, keyword) => {

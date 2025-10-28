@@ -4,7 +4,7 @@ import chalk from "@chalk";
 init({
     name: "music-getter",
     version: "0.0.1",
-    description: "A Music Resource Acquisition Tool.",
+    description: "A music resource acquisition tool that runs in the command line.",
     metas: {
         "Author": chalk.bgGreen(" Roy-Jin. "),
         "Github": chalk.underline("https://github.com/Roy-Jin/music-getter"),

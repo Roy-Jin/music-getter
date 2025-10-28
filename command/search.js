@@ -5,11 +5,11 @@ export default function search(_com) {
     _com
         .command("search <keyword>")
         .description("search song resource.")
-        .option("-s, --server <source>", "Specify the server source to download.", {
+        .option("-s, --server <source>", "Specify music platform.", {
             default: ["netease"],
             collect: true
         })
-        .option("-c, --check", "Check the song resource is available or not.")
+        .option("-c, --check", "Verify resource availability.")
         .action(async (options, keyword) => {
             const { server, check } = options;
 
