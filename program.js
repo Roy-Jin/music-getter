@@ -1,11 +1,11 @@
 import { Command } from "@command";
 
 let command;
-import song from "@command/song";
-import playlist from "@command/playlist";
-import album from "@command/album";
-import list from "@command/list";
-import search from "@command/search";
+import song from "@command/song.js";
+import playlist from "@command/playlist.js";
+import album from "@command/album.js";
+import list from "@command/list.js";
+import search from "@command/search.js";
 
 const init = (_ = {}) => {
     command = new Command()
@@ -17,7 +17,7 @@ const init = (_ = {}) => {
         })
         .description(_.description)
 
-    for (let key in _.metas) {
+    for (const key in _.metas) {
         command.meta(key, _.metas[key]);
     }
 

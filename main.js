@@ -1,4 +1,4 @@
-import { init, command } from "@/program";
+import { init, command } from "@/program.js";
 import chalk from "@chalk";
 
 init({

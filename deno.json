@@ -1,7 +1,7 @@
 {
   "tasks": {
-    "run": "deno run --sloppy-imports -A main.js",
-    "build": "deno compile -A --sloppy-imports --output=dist/mg main.js"
+    "run": "deno run -A main.js",
+    "build": "deno compile -A --output=dist/mg main.js"
   },
   "imports": {
     "@/": "./",

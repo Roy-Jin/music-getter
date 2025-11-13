@@ -1,4 +1,4 @@
-import meting from "@/meting";
+import meting from "@/meting.js";
 import chalk from "@chalk";
 
 export default function search(_com) {
@@ -23,7 +23,7 @@ export default function search(_com) {
 
             if (!data?.error) {
 
-                for (let music of data) {
+                for (const music of data) {
                     if (check) {
                         const length = await fetch(music.url, { method: 'HEAD' }).then(res => res.headers.get('content-length'));
 

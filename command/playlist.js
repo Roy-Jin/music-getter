@@ -1,5 +1,5 @@
-import meting from "@/meting";
-import download from "@/download";
+import meting from "@/meting.js";
+import download from "@/download.js";
 import * as path from "@path";
 import chalk from "@chalk";
 
@@ -28,7 +28,7 @@ export default function playlist(_com) {
                 const outputDir = path.normalize(`${Deno.cwd()}/${output}/`);
                 Deno.mkdirSync(outputDir, { recursive: true });
 
-                for (let music of data) {
+                for (const music of data) {
                     const out = (etx, isname) => {
                         let conbine_name = `${music.title}-${music.author}`;
                         if (conbine_name.length > 57) conbine_name = conbine_name.slice(0, 56) + "…";
@@ -37,9 +37,9 @@ export default function playlist(_com) {
                     };
 
                     if (cover) {
-                        await download.add(async () => fetch(music.pic, { method: "HEAD" })
+                        download.add( () => fetch(music.pic, { method: "HEAD" })
                             .then(response => response.url)
-                            .then(async (PicUrl) => {
+                            .then((PicUrl) => {
                                 const url = new URL(PicUrl);
                                 if (cover === "trueytrue") { url.search = "" }
                                 else { url.search = `?param=${cover}y${cover}` };
@@ -47,8 +47,8 @@ export default function playlist(_com) {
                             })
                             , out('png'))
                     }
-                    lyric && await download.add(music.lrc, out('lrc'));
-                    await download.add(music.url, out('mp3'));
+                    lyric && download.add(music.lrc, out('lrc'));
+                    download.add(music.url, out('mp3'));
                     console.log(chalk.bgBlue.bold(" + ") + chalk.bgGray(` ${out('', true)} `));
                 }
 

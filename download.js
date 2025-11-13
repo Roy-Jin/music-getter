@@ -13,7 +13,7 @@ const download = {
      * @param {string|function} url - Download URL
      * @param {*} output - Output directory
      */
-    add: async (url, output) => {
+    add: (url, output) => {
         const start = async (index) => {
             if (typeof url == "function") url = await url();
             const response = await fetch(url);
