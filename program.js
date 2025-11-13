@@ -6,6 +6,7 @@ import playlist from "@command/playlist.js";
 import album from "@command/album.js";
 import list from "@command/list.js";
 import search from "@command/search.js";
+import preview from "@command/preview.js";
 
 const init = (_ = {}) => {
     command = new Command()
@@ -26,6 +27,7 @@ const init = (_ = {}) => {
     playlist(command)
     list(command)
     search(command)
+    preview(command)
 }
 
 export {

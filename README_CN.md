@@ -164,6 +164,18 @@ mg list 7697114803 --check
 mg search "Daylight-Seredris" --server netease --server tencent
 ```
 
+### `preview <keyword>`
+打开网页预览歌曲。
+
+**选项:**
+- `-s, --server <source>`: 指定音乐平台。
+
+**示例:**
+```sh
+# 打开网易云音乐歌曲"Daylight-Seredris"的网页预览
+mg preview 1372188635 --server netease
+```
+
 ## 📜 许可证
 
 基于MIT许可证分发。详情请参阅[`LICENSE`](LICENSE)。

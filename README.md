@@ -164,6 +164,18 @@ search song resource.
 mg search "Daylight-Seredris" --server netease --server tencent
 ```
 
+### `preview <keyword>`
+Open the web to preview music.
+
+**Options:**
+- `-s, --server <source>`: Specify music platform.
+
+**Example:**
+```sh
+# Preview netease song "Daylight-Seredris" on the web
+mg preview 1372188635 --server netease
+```
+
 ## 📜 License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
