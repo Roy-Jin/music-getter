@@ -3,7 +3,7 @@ import chalk from "@chalk";
 
 init({
     name: "music-getter",
-    version: "0.0.1",
+    version: "0.0.2",
     description: "A music resource acquisition tool that runs in the command line.",
     metas: {
         "Author": chalk.bgGreen(" Roy-Jin. "),
