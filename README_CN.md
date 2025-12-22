@@ -53,15 +53,15 @@
 
 ```
 ├── command/        # 命令实现
-│   ├── album.js    # 专辑操作
-│   ├── list.js     # 资源列表
-│   ├── playlist.js # 歌单操作
-│   ├── search.js   # 搜索功能
-│   └── song.js     # 单曲操作
-├── download.js     # 下载管理器
-├── meting.js       # 音乐API客户端
-├── program.js      # CLI设置
-└── main.js         # 入口文件
+│   ├── album.ts    # 专辑操作
+│   ├── list.ts     # 资源列表
+│   ├── playlist.ts # 歌单操作
+│   ├── search.ts   # 搜索功能
+│   └── song.ts     # 单曲操作
+├── download.ts     # 下载管理器
+├── meting.ts       # 音乐API客户端
+├── program.ts      # CLI设置
+└── main.ts         # 入口文件
 ```
 
 </details>

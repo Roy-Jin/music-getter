@@ -5,12 +5,13 @@
     "jsr:@cliffy/flags@1.0.0-rc.8": "1.0.0-rc.8",
     "jsr:@cliffy/internal@1.0.0-rc.8": "1.0.0-rc.8",
     "jsr:@cliffy/table@1.0.0-rc.8": "1.0.0-rc.8",
-    "jsr:@nothing628/chalk@*": "1.0.1",
     "jsr:@ryweal/progress@*": "1.0.1",
     "jsr:@std/fmt@~1.0.2": "1.0.8",
     "jsr:@std/internal@^1.0.10": "1.0.12",
     "jsr:@std/path@*": "1.1.2",
-    "jsr:@std/text@~1.0.7": "1.0.16"
+    "jsr:@std/text@~1.0.7": "1.0.16",
+    "npm:@types/node@*": "24.2.0",
+    "npm:chalk@^5.3.0": "5.6.2"
   },
   "jsr": {
     "@cliffy/command@1.0.0-rc.8": {
@@ -38,9 +39,6 @@
         "jsr:@std/fmt"
       ]
     },
-    "@nothing628/chalk@1.0.1": {
-      "integrity": "d89ab2f1a9674ce7134b791ea8f53aec728d3e00ad89d08c44785bff342d2ef6"
-    },
     "@ryweal/progress@1.0.1": {
       "integrity": "7aeaaa9aab5c9d3ad348942dcb23616a062b08afa19b0a5f100937ecd0bab613"
     },
@@ -60,12 +58,29 @@
       "integrity": "ddb9853b75119a2473857d691cf1ec02ad90793a2e8b4a4ac49d7354281a0cf8"
     }
   },
+  "npm": {
+    "@types/node@24.2.0": {
+      "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
+      "dependencies": [
+        "undici-types"
+      ],
+      "tarball": "https://registry.npmmirror.com/@types/node/-/node-24.2.0.tgz"
+    },
+    "chalk@5.6.2": {
+      "integrity": "sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==",
+      "tarball": "https://registry.npmmirror.com/chalk/-/chalk-5.6.2.tgz"
+    },
+    "undici-types@7.10.0": {
+      "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag==",
+      "tarball": "https://registry.npmmirror.com/undici-types/-/undici-types-7.10.0.tgz"
+    }
+  },
   "workspace": {
     "dependencies": [
       "jsr:@cliffy/command@1.0.0-rc.8",
-      "jsr:@nothing628/chalk@*",
       "jsr:@ryweal/progress@*",
-      "jsr:@std/path@*"
+      "jsr:@std/path@*",
+      "npm:chalk@^5.3.0"
     ]
   }
 }

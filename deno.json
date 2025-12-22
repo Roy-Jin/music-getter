@@ -1,13 +1,13 @@
 {
   "tasks": {
-    "run": "deno run -A main.js",
-    "build": "deno compile -A --output=dist/mg main.js"
+    "run": "deno run -A main.ts",
+    "build": "deno compile -A --no-check --output=dist/mg main.ts"
   },
   "imports": {
     "@/": "./",
     "@command/": "./command/",
     "@path": "jsr:@std/path",
-    "@chalk": "jsr:@nothing628/chalk",
+    "@chalk": "npm:chalk@^5.3.0",
     "@progress": "jsr:@ryweal/progress",
     "@command": "jsr:@cliffy/command@1.0.0-rc.8"
   }

@@ -53,15 +53,15 @@ A music resource acquisition tool that runs in the command line.
 
 ```
 ├── command/        # Command implementations
-│   ├── album.js    # Album operations
-│   ├── list.js     # Resource listing
-│   ├── playlist.js # Playlist operations
-│   ├── search.js   # Search functionality
-│   └── song.js     # Song operations
-├── download.js     # Download manager
-├── meting.js       # Music API client
-├── program.js      # CLI setup
-└── main.js         # Entry point
+│   ├── album.ts    # Album operations
+│   ├── list.ts     # Resource listing
+│   ├── playlist.ts # Playlist operations
+│   ├── search.ts   # Search functionality
+│   └── song.ts     # Song operations
+├── download.ts     # Download manager
+├── meting.ts       # Music API client
+├── program.ts      # CLI setup
+└── main.ts         # Entry point
 ```
 
 </details>

@@ -60,7 +60,8 @@ jobs:
                 '--sloppy-imports',
                 '--target', target.name,
                 '--output', binaryPath,
-                'main.js'
+                '--no-check',
+                'main.ts'
               ]
             });
             
