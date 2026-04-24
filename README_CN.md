@@ -2,184 +2,186 @@
 
 # 🎵 music-getter
 
-[![GitHub Stars](https://img.shields.io/github/stars/Roy-Jin/music-getter?style=for-the-badge)](https://github.com/Roy-Jin/music-getter/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/Roy-Jin/music-getter?style=for-the-badge)](https://github.com/Roy-Jin/music-getter/issues)
-[![MIT License](https://img.shields.io/github/license/Roy-Jin/music-getter?style=for-the-badge)](LICENSE)
+**一个支持 Meting API 的音乐资源获取工具。**
 
-一个运行在命令行的音乐资源获取工具。  
-[English](README.md) | [中文](README_CN.md)
+[![npm version](https://img.shields.io/npm/v/music-getter?style=flat-square)](https://www.npmjs.com/package/music-getter)
+[![GitHub Stars](https://img.shields.io/github/stars/Roy-Jin/music-getter?style=flat-square)](https://github.com/Roy-Jin/music-getter/stargazers)
+[![MIT License](https://img.shields.io/github/license/Roy-Jin/music-getter?style=flat-square)](LICENSE)
+[![Node.js](https://img.shields.io/node/v/music-getter?style=flat-square)](https://nodejs.org)
+
+[English](README.md) · [中文](README_CN.md)
+
 </div>
 
-<details>
-<summary>目录</summary>
+---
 
-- [核心功能](#-核心功能)
-- [使用技术](#-使用技术)
-- [项目结构](#-项目结构)
-- [快速开始](#-快速开始)
-  - [前提条件](#前提条件)
-  - [安装](#安装)
-- [可用命令](#-可用命令)
-  - [`song <keyword>`](#song-keyword)
-  - [`album <keyword>`](#album-keyword)
-  - [`playlist <keyword>`](#playlist-keyword)
-  - [`ls, list <keyword>`](#ls-list-keyword)
-  - [`search <keyword>`](#search-keyword)
-- [许可证](#-许可证)
-- [联系方式](#-联系方式)
+## 特性
 
-</details>
+- 🎶 **多平台支持** — 支持网易云音乐（默认）、QQ音乐
+- 🔍 **支持搜索** — 可同时跨多个平台搜索歌曲
+- 📦 **批量下载** — 一键下载整个歌单
+- 📝 **歌词与封面** — 可选下载歌词文件和封面图片
+- 🎚️ **码率控制** — 自选音码率
+- 🌐 **在线预览** — 在浏览器中直接预览歌曲
 
-## ✨ 核心功能
-
-- **多平台音乐下载**: 支持netease(default)，tencent和kugou音乐平台
-- **高级搜索**: 可同时跨多个平台搜索
-- **批量下载**: 一键下载整张专辑或歌单
-- **下载管理**: 进度跟踪和同步下载
-- **资源验证**: 下载前检查资源可用性
-
-## 🛠️ 使用技术
-
-- [Deno](https://deno.land/) - 运行时环境
-- [Cliffy Command](https://github.com/c4spar/deno-cliffy) - CLI框架
-- [Meting API](https://api.i-meto.com/meting/api) - 音乐服务集成
-- [Chalk](https://jsr.io/@nothing628/chalk) - 终端样式
-- [Progress](https://jsr.io/@ryweal/progress) - 下载进度跟踪
-
-## 🗂 项目结构
-
-<details>
-<summary>music-getter/</summary>
-
-```
-├── command/        # 命令实现
-│   ├── album.ts    # 专辑操作
-│   ├── list.ts     # 资源列表
-│   ├── playlist.ts # 歌单操作
-│   ├── search.ts   # 搜索功能
-│   └── song.ts     # 单曲操作
-├── download.ts     # 下载管理器
-├── meting.ts       # 音乐API客户端
-├── program.ts      # CLI设置
-└── main.ts         # 入口文件
-```
-
-</details>
-
-## 🚀 快速开始
-
-### 前提条件
-- [Deno](https://docs.deno.com/runtime/getting_started/installation/) >= 1.30.0
+## 快速开始
 
 ### 安装
 
-- 从[Github Releases](https://github.com/Roy-Jin/music-getter/releases/latest)下载最新版本  
-- 或者本地运行和打包:
 ```sh
-# 克隆仓库
-git clone https://github.com/Roy-Jin/music-getter.git
-
-# 进入项目目录
-cd music-getter
-
-# 运行程序
-deno task run
-
-# 构建程序
-deno task build
+npm install -g music-getter
 ```
 
-## 🎛️ 可用命令
+免安装使用：
 
-### `song <keyword>`
-获取单曲资源。
-
-**选项:**
-- `-l, --lyric`: 包含歌词文件。
-- `-c, --cover [size]`: 包含封面图片。(例如 -c "120")
-- `-o, --output <path>`: 自定义输出目录。
-- `-s, --server <source>`: 指定音乐平台。
-
-**示例:**
 ```sh
-# 下载网易云音乐歌曲"Daylight-Seredris"，包含歌词和封面图片
-mg song 1372188635 --lyric --cover --output out
+npx music-getter --help
 ```
 
-### `album <keyword>`
-获取整张专辑资源。
+### 用法
 
-**选项:**
-- `-l, --lyric`: 为所有歌曲包含歌词。
-- `-c, --cover [size]`: 为所有歌曲包含封面图片。
-- `-o, --output <path>`: 自定义输出目录。
-- `-s, --server <source>`: 指定来源平台。
-
-**示例:**
 ```sh
-# 下载网易云音乐专辑"Daylight"，包含歌词和封面图片
-mg album 79797968 --lyric --cover --output out
+mg <command> [options]
 ```
 
-### `playlist <keyword>`
-获取整个歌单资源。
+> `music-getter` 和 `mg` 均可作为 CLI 命令使用。
 
-**选项:**
-- `-l, --lyric`: 为所有歌曲包含歌词。
-- `-c, --cover [size]`: 为所有歌曲包含封面图片。
-- `-o, --output <path>`: 自定义输出目录。
-- `-s, --server <source>`: 指定来源平台。
+## 命令
 
-**示例:**
+### `song <song-id>`
+
+下载单曲。
+
 ```sh
-# 下载网易云音乐歌单"咖啡很苦 生活很甜"
-mg playlist 7697114803 --output out
+mg song 1372188635
+mg song 1372188635 --lyric --cover --output ./downloads
+mg song 1372188635 --server tencent --bitrate 320
 ```
 
-### `ls, list <keyword>`
-列出特定类型的资源。  
-(支持类型: playlist, album, artist)
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-l, --lyric` | 包含 `.lrc` 歌词文件 | — |
+| `-c, --cover [size]` | 包含封面图片（可选尺寸，单位 px） | — |
+| `-o, --output <path>` | 输出目录 | `./` |
+| `-s, --server <source>` | 音乐平台 | `netease` |
+| `-a, --api <url>` | 自定义 API 地址 | — |
+| `-b, --bitrate <kbps>` | 音频码率（`128`、`192`、`320`） | `128` |
 
-**选项:**
-- `-t, --type <type>`: 资源类型。(默认: "playlist")
-- `-c, --check`: 验证资源可用性。
-- `-s, --server <source>`: 指定来源平台。
+### `playlist <playlist-id>`
 
-**示例:**
+下载整个歌单。
+
 ```sh
-# 列出网易云音乐歌单"咖啡很苦 生活很甜"中的可用资源
-mg list 7697114803 --check
+mg playlist 7697114803
+mg playlist 7697114803 --lyric --cover --output ./my-playlist
 ```
+
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-l, --lyric` | 为所有歌曲包含歌词 | — |
+| `-c, --cover [size]` | 包含封面图片 | — |
+| `-o, --output <path>` | 输出目录 | `./` |
+| `-s, --server <source>` | 音乐平台 | `netease` |
+| `-a, --api <url>` | 自定义 API 地址 | — |
+| `-b, --bitrate <kbps>` | 音频码率（`128`、`192`、`320`） | `128` |
 
 ### `search <keyword>`
-搜索歌曲资源。
 
-**选项:**
-- `-s, --server <source>`: 指定音乐平台。(可多选)
-- `-c, --check`: 验证资源可用性。
+跨平台搜索歌曲。
 
-**示例:**
 ```sh
-# 在网易云音乐和QQ音乐平台搜索"Daylight-Seredris"
-mg search "Daylight-Seredris" --server netease --server tencent
+mg search "Daylight"
+mg search "Daylight" --server netease --server tencent
+mg search "Daylight" --limit 10 --page 2
 ```
 
-### `preview <keyword>`
-打开网页预览歌曲。
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-s, --server <source...>` | 音乐平台（可重复指定） | `netease` |
+| `-a, --api <url>` | 自定义 API 地址 | — |
+| `-t, --type <type>` | 搜索类型 | `1` |
+| `-p, --page <number>` | 页码 | `1` |
+| `-l, --limit <number>` | 每页结果数 | `30` |
 
-**选项:**
-- `-s, --server <source>`: 指定音乐平台。
+### `list <resource-id>`
 
-**示例:**
+列出歌单或歌手的资源列表。
+
 ```sh
-# 打开网易云音乐歌曲"Daylight-Seredris"的网页预览
-mg preview 1372188635 --server netease
+mg list 7697114803
+mg list 7697114803 --type artist
+mg ls 7697114803
 ```
 
-## 📜 许可证
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-t, --type <type>` | 资源类型（`playlist`、`artist`） | `playlist` |
+| `-s, --server <source>` | 音乐平台 | `netease` |
+| `-a, --api <url>` | 自定义 API 地址 | — |
 
-基于MIT许可证分发。详情请参阅[`LICENSE`](LICENSE)。
+### `preview <song-id>`
 
-## 📬 联系方式
+在浏览器中预览歌曲。
 
-Roy-Jin - [jinroy@outlook.com](mailto:jinroy@outlook.com)
+```sh
+mg preview 1372188635
+mg preview 1372188635 --server tencent
+```
+
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-s, --server <source>` | 音乐平台 | `netease` |
+| `-a, --api <url>` | 自定义 API 地址 | — |
+
+## 编程接口
+
+你也可以在 Node.js 项目中将 `music-getter` 作为库使用。
+
+```ts
+import { Meting, download } from 'music-getter';
+
+const meting = new Meting('netease');
+meting.format(true);
+
+// 搜索歌曲
+const results = JSON.parse(await meting.search('Daylight', { limit: 10 }));
+
+// 获取歌曲详情
+const song = JSON.parse(await meting.song('1372188635'));
+
+// 下载
+download.add(song[0].url_id, './output.mp3');
+await download.startAll();
+```
+
+### Meting API
+
+```ts
+const meting = new Meting(server?: string);  // 'netease' | 'tencent'
+
+meting.site(server: string)     // 设置平台
+meting.api(url: string)         // 设置自定义 API 地址
+meting.cookie(cookie: string)   // 设置 Cookie
+meting.format(enable: boolean)  // 启用格式化响应
+
+await meting.search(keyword: string, options?: SearchOptions): Promise<string>
+await meting.song(id: string | number): Promise<string>
+await meting.artist(id: string | number, limit?: number): Promise<string>
+await meting.playlist(id: string | number): Promise<string>
+await meting.url(id: string | number, bitrate?: number): Promise<string>
+await meting.lyric(id: string | number): Promise<string>
+await meting.pic(id: string | number, size?: number): Promise<string>
+```
+
+## 从源码构建
+
+```sh
+git clone https://github.com/Roy-Jin/music-getter.git
+cd music-getter
+npm install
+npm run build
+```
+
+## 许可证
+
+[MIT](LICENSE) © Roy-Jin
