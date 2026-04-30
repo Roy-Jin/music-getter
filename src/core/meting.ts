@@ -1,6 +1,6 @@
-import chalk from 'chalk';
+import chalk from "chalk";
 
-const DEFAULT_API = 'https://api.qijieya.cn/meting/';
+const DEFAULT_API = "https://api.qijieya.cn/meting/";
 
 export interface SearchOptions {
   type?: number;
@@ -37,13 +37,13 @@ export class Meting {
   private server: string;
   private cookieValue: string;
   private formatEnabled: boolean;
-  private _api: string;
+  static api: string;
 
-  constructor(server: string = 'netease') {
+  constructor(server: string = "netease") {
     this.server = server;
-    this.cookieValue = '';
+    this.cookieValue = "";
     this.formatEnabled = false;
-    this._api = DEFAULT_API;
+    Meting.api = DEFAULT_API;
   }
 
   site(server: string): this {
@@ -52,7 +52,7 @@ export class Meting {
   }
 
   api(apiUrl: string): this {
-    this._api = apiUrl;
+    Meting.api = apiUrl;
     return this;
   }
 
@@ -66,7 +66,11 @@ export class Meting {
     return this;
   }
 
-  private async request(type: string, id: string | number, options: Record<string, unknown> = {}): Promise<string> {
+  private async request(
+    type: string,
+    id: string | number,
+    options: Record<string, unknown> = {},
+  ): Promise<string> {
     const params = new URLSearchParams({
       server: this.server,
       type: type,
@@ -75,11 +79,11 @@ export class Meting {
     });
 
     if (this.cookieValue) {
-      params.set('cookie', this.cookieValue);
+      params.set("cookie", this.cookieValue);
     }
 
     try {
-      const requestUrl = new URL(this._api);
+      const requestUrl = new URL(Meting.api);
       params.forEach((value, key) => {
         requestUrl.searchParams.set(key, value);
       });
@@ -93,20 +97,20 @@ export class Meting {
       const data = await response.json();
 
       if (!Array.isArray(data) || data.length === 0) {
-        throw new Error('Empty response');
+        throw new Error("Empty response");
       }
 
-      if (data[0] && 'name' in data[0]) {
+      if (data[0] && "name" in data[0]) {
         if (this.formatEnabled) {
           return JSON.stringify(this.formatData(data));
         }
         return JSON.stringify(data);
       }
 
-      throw new Error('Invalid response format');
+      throw new Error("Invalid response format");
     } catch (error) {
       this.handleError(error, type);
-      return '[]';
+      return "[]";
     }
   }
 
@@ -114,13 +118,13 @@ export class Meting {
     return data.map((item: unknown) => {
       const music = item as Record<string, unknown>;
 
-      let id = String(music.id || '');
+      let id = String(music.id || "");
       if (!id) {
-        const url = String(music.url || '');
+        const url = String(music.url || "");
         if (url) {
           try {
             const urlObj = new URL(url);
-            const extractedId = urlObj.searchParams.get('id');
+            const extractedId = urlObj.searchParams.get("id");
             if (extractedId) {
               id = extractedId;
             }
@@ -132,14 +136,16 @@ export class Meting {
 
       return {
         id: id,
-        name: String(music.name || ''),
-        artist: Array.isArray(music.artist) ? music.artist as string[] : String(music.artist || '').split(' / '),
-        album: String(music.album || ''),
+        name: String(music.name || ""),
+        artist: Array.isArray(music.artist)
+          ? music.artist as string[]
+          : String(music.artist || "").split(" / "),
+        album: String(music.album || ""),
         pic_id: String(music.pic_id || id),
-        pic: String(music.pic || ''),
-        url_id: String(music.url_id || music.url || ''),
+        pic: String(music.pic || ""),
+        url_id: String(music.url_id || music.url || ""),
         lyric_id: String(music.lyric_id || id),
-        lrc: String(music.lrc || ''),
+        lrc: String(music.lrc || ""),
         source: String(music.source || this.server),
       };
     });
@@ -147,7 +153,7 @@ export class Meting {
 
   private handleError(error: unknown, type: string): void {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    console.log(`${chalk.red('error: ')}${errorMessage}`);
+    console.log(`${chalk.red("error: ")}${errorMessage}`);
   }
 
   async search(keyword: string, options: SearchOptions = {}): Promise<string> {
@@ -156,31 +162,31 @@ export class Meting {
       page: options.page ?? 1,
       limit: options.limit ?? 30,
     };
-    return await this.request('search', keyword, searchOptions);
+    return await this.request("search", keyword, searchOptions);
   }
 
   async song(id: string | number): Promise<string> {
-    return await this.request('song', id);
+    return await this.request("song", id);
   }
 
   async artist(id: string | number, limit: number = 30): Promise<string> {
-    return await this.request('artist', id, { limit });
+    return await this.request("artist", id, { limit });
   }
 
   async playlist(id: string | number): Promise<string> {
-    return await this.request('playlist', id);
+    return await this.request("playlist", id);
   }
 
   async url(id: string | number, bitrate: number = 320): Promise<string> {
-    return await this.request('url', id, { br: bitrate });
+    return await this.request("url", id, { br: bitrate });
   }
 
   async lyric(id: string | number): Promise<string> {
-    return await this.request('lrc', id);
+    return await this.request("lrc", id);
   }
 
   async pic(id: string | number, size: number = 300): Promise<string> {
-    return await this.request('pic', id, { cover: size });
+    return await this.request("pic", id, { cover: size });
   }
 }
 
