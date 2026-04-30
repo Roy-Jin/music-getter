@@ -16,6 +16,9 @@
     "README_CN.md",
     "LICENSE"
   ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/bin/cli.ts",
