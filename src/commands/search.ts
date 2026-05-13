@@ -1,5 +1,5 @@
 import Meting from "../core/meting";
-import chalk from "chalk";
+import { styleText } from "util"; 
 import { Command } from "commander";
 
 interface MusicItem {
@@ -45,22 +45,24 @@ export default function search(program: Command) {
         const data = results.flat();
 
         if (!data || data.length === 0) {
-          console.error(chalk.red.bold("error: ") + "No results found.");
+          console.error(
+            styleText(["bold", "red"], "error: ") + "No results found.",
+          );
           return;
         }
 
         for (const music of data) {
           console.log(
-            chalk.blue.bold(` ${music.source}|${music.id} \t`) +
-              chalk.bgGray.bold(` ${music.name} `) +
-              chalk.gray(` ${music.artist.join(", ")} `),
+            styleText(["bold", "blue"], ` ${music.source}|${music.id} \t`) +
+              styleText(["bold", "bgGray"], ` ${music.name} `) +
+              styleText("gray", ` ${music.artist.join(", ")} `),
           );
         }
       } catch (error) {
         const errorMessage = error instanceof Error
           ? error.message
           : String(error);
-        console.error(chalk.red.bold("error: ") + errorMessage);
+        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
       }
     });
 }

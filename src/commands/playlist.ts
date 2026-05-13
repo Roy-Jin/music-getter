@@ -3,7 +3,7 @@ import download from "../core/download";
 import { sanitize } from "../core/util";
 import * as path from "path";
 import { mkdirSync } from "fs";
-import chalk from "chalk";
+import { styleText } from "util";
 import { Command } from "commander";
 
 interface MusicItem {
@@ -92,7 +92,9 @@ export default function playlist(program: Command) {
         const data: MusicItem[] = JSON.parse(dataStr);
 
         if (!data || data.length === 0) {
-          console.error(chalk.red.bold("error: ") + "No playlist found.");
+          console.error(
+            styleText(["bold", "red"], "error: ") + "No playlist found.",
+          );
           return;
         }
 
@@ -135,7 +137,8 @@ export default function playlist(program: Command) {
           download.add(musicUrl, out("mp3"));
 
           console.log(
-            chalk.bgBlue.bold(" + ") + chalk.bgGray(` ${out("", true)} `),
+            styleText(["bold", "bgBlue"], " + ") +
+              styleText("bgGray", ` ${out("", true)} `),
           );
         }
 
@@ -145,7 +148,7 @@ export default function playlist(program: Command) {
         const errorMessage = error instanceof Error
           ? error.message
           : String(error);
-        console.error(chalk.red.bold("error: ") + errorMessage);
+        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
       }
     });
 }

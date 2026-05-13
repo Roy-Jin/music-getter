@@ -1,6 +1,6 @@
 {
   "name": "music-getter",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A music resource acquisition tool that supports the Meting API.",
   "author": "Roy-Jin",
   "license": "MIT",
@@ -17,11 +17,12 @@
     "LICENSE"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.12.0"
   },
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node src/bin/cli.ts",
+    "start": "node dist/bin/cli.js",
+    "dev": "tsx src/bin/cli.ts",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -42,15 +43,14 @@
     "provenance": true
   },
   "dependencies": {
-    "chalk": "^5.3.0",
-    "commander": "^12.1.0",
-    "cli-progress": "^3.12.0"
+    "cli-progress": "^3.12.0",
+    "commander": "^14.0.3"
   },
   "devDependencies": {
-    "@types/node": "^20.12.0",
-    "@types/cli-progress": "^3.11.5",
-    "typescript": "^5.4.0",
-    "ts-node": "^10.9.2"
+    "@types/cli-progress": "^3.11.6",
+    "@types/node": "^25.7.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
   },
   "bugs": {
     "url": "https://github.com/Roy-Jin/music-getter/issues"

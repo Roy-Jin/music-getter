@@ -1,8 +1,7 @@
 import Meting from "../core/meting";
-import chalk from "chalk";
+import { styleText, promisify } from "util";
 import { Command } from "commander";
 import { exec } from "child_process";
-import { promisify } from "util";
 
 const execAsync = promisify(exec);
 
@@ -36,7 +35,9 @@ export default function preview(program: Command) {
         const data: MusicItem[] = JSON.parse(dataStr);
 
         if (!data || data.length === 0) {
-          console.error(chalk.red.bold("error: ") + "No song found.");
+          console.error(
+            styleText(["bold", "red"], "error: ") + "No song found.",
+          );
           return;
         }
 
@@ -45,13 +46,14 @@ export default function preview(program: Command) {
 
         if (!musicUrl) {
           console.error(
-            chalk.red.bold("error: ") + "No streaming URL available.",
+            styleText(["bold", "red"], "error: ") +
+              "No streaming URL available.",
           );
           return;
         }
 
         console.log(
-          chalk.green.bold("Opening: ") +
+          styleText(["bold", "green"], "Opening: ") +
             `${music.name} - ${music.artist.join(", ")}`,
         );
 
@@ -60,7 +62,7 @@ export default function preview(program: Command) {
           try {
             parsedUrl = new URL(url);
           } catch {
-            console.error(chalk.red.bold("Invalid URL."));
+            console.error(styleText(["bold", "red"], "Invalid URL."));
             process.exit(1);
             return;
           }
@@ -68,7 +70,9 @@ export default function preview(program: Command) {
           if (
             parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:"
           ) {
-            console.error(chalk.red.bold("Only http/https URLs are allowed."));
+            console.error(
+              styleText(["bold", "red"], "Only http/https URLs are allowed."),
+            );
             process.exit(1);
           }
 
@@ -91,7 +95,10 @@ export default function preview(program: Command) {
             await execAsync(command);
           } catch (error) {
             console.error(
-              chalk.red.bold(`Failed to open URL in the default browser.`),
+              styleText(
+                ["bold", "red"],
+                `Failed to open URL in the default browser.`,
+              ),
             );
             process.exit(1);
           }
@@ -102,7 +109,7 @@ export default function preview(program: Command) {
         const errorMessage = error instanceof Error
           ? error.message
           : String(error);
-        console.error(chalk.red.bold("error: ") + errorMessage);
+        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
       }
     });
 }

@@ -1,13 +1,13 @@
 #! /usr/bin/env node
 
-import { Command } from 'commander';
-import chalk from 'chalk';
-import song from '../commands/song';
-import playlist from '../commands/playlist';
-import list from '../commands/list';
-import search from '../commands/search';
-import preview from '../commands/preview';
-import packageJson from '../../package.json';
+import { Command } from "commander";
+import { styleText } from "util";
+import song from "../commands/song";
+import playlist from "../commands/playlist";
+import list from "../commands/list";
+import search from "../commands/search";
+import preview from "../commands/preview";
+import packageJson from "../../package.json";
 
 const program = new Command();
 
@@ -15,11 +15,20 @@ program
   .name(packageJson.name)
   .version(packageJson.version)
   .description(packageJson.description)
-  .addHelpText('before', `
-${chalk.bold('Author:')} ${chalk.bgGreen(' ' + packageJson.author + ' ')}
-${chalk.bold('Github:')} ${chalk.underline('https://github.com/Roy-Jin/music-getter')}
-${chalk.bold('Supported source:')} ${chalk.green('netease, tencent')}
-`);
+  .addHelpText(
+    "before",
+    `
+${styleText("bold", "Author:")} ${
+      styleText("bgGreen", " " + packageJson.author + " ")
+    }
+${styleText("bold", "Github:")} ${
+      styleText("underline", packageJson.repository.url)
+    }
+${styleText("bold", "Supported source:")} ${
+      styleText("green", "netease, tencent")
+    }
+`,
+  );
 
 song(program);
 playlist(program);

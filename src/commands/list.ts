@@ -1,5 +1,5 @@
 import Meting from "../core/meting";
-import chalk from "chalk";
+import { styleText } from "util";
 import { Command } from "commander";
 
 interface MusicItem {
@@ -21,7 +21,7 @@ export default function list(program: Command) {
     .option("-t, --type <type>", "Resource type.", "playlist")
     .addHelpText(
       "after",
-      `\n  Supported types: ${chalk.green("playlist, artist")}`,
+      `\n  Supported types: ${styleText("green", "playlist, artist")}`,
     )
     .option("-s, --server <source>", "Specify source platform.", "netease")
     .option("-a, --api <url>", "Specify API endpoint.")
@@ -49,22 +49,24 @@ export default function list(program: Command) {
         const data: MusicItem[] = JSON.parse(dataStr);
 
         if (!data || data.length === 0) {
-          console.error(chalk.red.bold("error: ") + "No results found.");
+          console.error(
+            styleText(["bold", "red"], "error: ") + "No results found.",
+          );
           return;
         }
 
         for (const music of data) {
           console.log(
-            chalk.blue.bold(` ${music.source}|${music.id} \t`) +
-              chalk.bgGray.bold(` ${music.name} `) +
-              chalk.gray(` ${music.artist.join(", ")} `),
+            styleText(["bold", "blue"], ` ${music.source}|${music.id} \t`) +
+              styleText(["bold", "bgGray"], ` ${music.name} `) +
+              styleText("gray", ` ${music.artist.join(", ")} `),
           );
         }
       } catch (error) {
         const errorMessage = error instanceof Error
           ? error.message
           : String(error);
-        console.error(chalk.red.bold("error: ") + errorMessage);
+        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
       }
     });
 }

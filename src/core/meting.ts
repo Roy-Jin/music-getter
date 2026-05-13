@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import { styleText } from "util";
 
 const DEFAULT_API = "https://api.qijieya.cn/meting/";
 
@@ -153,7 +153,7 @@ export class Meting {
 
   private handleError(error: unknown, type: string): void {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    console.log(`${chalk.red("error: ")}${errorMessage}`);
+    console.log(`${styleText("red", "error: ")}${errorMessage}`);
   }
 
   async search(keyword: string, options: SearchOptions = {}): Promise<string> {
