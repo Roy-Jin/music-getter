@@ -1,6 +1,6 @@
 {
   "name": "music-getter",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A music resource acquisition tool that supports the Meting API.",
   "author": "Roy-Jin",
   "license": "MIT",
@@ -14,7 +14,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20.12.0"
+    "node": ">=20"
   },
   "scripts": {
     "build": "tsc",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
-    "@types/node": "^25.7.0",
+    "@types/node": "^20.19.41",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   },
