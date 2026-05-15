@@ -1,0 +1,14 @@
+{
+  "quickStart": {
+    "en": "Quick Start",
+    "zh": "快速开始"
+  },
+  "usageGuide": {
+    "en": "Usage Guide",
+    "zh": "使用指南"
+  },
+  "advanced": {
+    "en": "Advanced",
+    "zh": "进阶用法"
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "text": "指南",
+    "link": "/guide/start/introduction",
+    "activeMatch": "/guide/"
+  },
+  {
+    "text": "API",
+    "link": "/api/",
+    "activeMatch": "/api/"
+  },
+  {
+    "text": "常见问题",
+    "link": "/faq/",
+    "activeMatch": "/faq/"
+  },
+  {
+    "text": "反馈",
+    "link": "https://github.com/Roy-Jin/music-getter/issues",
+    "activeMatch": "https://github.com/Roy-Jin/music-getter/issues"
+  }
+]

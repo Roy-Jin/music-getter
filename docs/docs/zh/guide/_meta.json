@@ -1,0 +1,17 @@
+[
+  {
+    "type": "dir-section-header",
+    "name": "start",
+    "label": "quickStart"
+  },
+  {
+    "type": "dir-section-header",
+    "name": "usage",
+    "label": "usageGuide"
+  },
+  {
+    "type": "dir-section-header",
+    "name": "advanced",
+    "label": "advanced"
+  }
+]

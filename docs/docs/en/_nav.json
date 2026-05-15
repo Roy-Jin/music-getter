@@ -1,0 +1,22 @@
+[
+  {
+    "text": "Guide",
+    "link": "/guide/start/introduction",
+    "activeMatch": "/guide/"
+  },
+  {
+    "text": "API",
+    "link": "/api/",
+    "activeMatch": "/api/"
+  },
+  {
+    "text": "FAQ",
+    "link": "/faq/",
+    "activeMatch": "/faq/"
+  },
+  {
+    "text": "Issue",
+    "link": "https://github.com/Roy-Jin/music-getter/issues",
+    "activeMatch": "https://github.com/Roy-Jin/music-getter/issues"
+  }
+]
