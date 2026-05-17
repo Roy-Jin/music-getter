@@ -13,7 +13,7 @@ const program = new Command();
 
 program
   .name(packageJson.name)
-  .version(packageJson.version)
+  .version(packageJson.version, "-v, --version")
   .description(packageJson.description)
   .addHelpText(
     "before",

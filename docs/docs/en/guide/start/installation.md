@@ -80,7 +80,7 @@ Commands:
   preview <song-id>      Open the web to preview music.
 
 Options:
-  -V, --version          output the version number
+  -v, --version          output the version number
   -h, --help             display help for command
 ```
 
