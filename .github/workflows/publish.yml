@@ -21,4 +21,16 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm run build
-      - run: npm publish
+
+      - name: Determine npm tag
+        id: npm_tag
+        run: |
+          if [[ "${GITHUB_REF_NAME#v}" == *-* ]]; then
+            echo "tag=next" >> $GITHUB_OUTPUT
+          else
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Publish to npm
+        run: npm publish --tag ${{ steps.npm_tag.outputs.tag }}
