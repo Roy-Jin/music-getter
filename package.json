@@ -1,6 +1,6 @@
 {
   "name": "music-getter",
-  "version": "1.2.2",
+  "version": "1.2.3-beta",
   "description": "A music resource acquisition tool that supports the Meting API.",
   "author": "Roy-Jin",
   "license": "MIT",

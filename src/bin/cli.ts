@@ -24,9 +24,6 @@ ${styleText("bold", "Author:")} ${
 ${styleText("bold", "Github:")} ${
       styleText("underline", packageJson.repository.url)
     }
-${styleText("bold", "Supported source:")} ${
-      styleText("green", "netease, tencent")
-    }
 `,
   );
 
