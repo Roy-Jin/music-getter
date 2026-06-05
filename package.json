@@ -1,6 +1,6 @@
 {
   "name": "ncmget",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A lightweight and powerful cli tool for NetEase Cloud Music Getter.",
   "author": "Roy-Jin",
   "license": "MIT",
