@@ -1,68 +1,51 @@
-import Meting from "../core/meting";
-import { styleText } from "util"; 
 import { Command } from "commander";
+import { styleText } from "node:util";
+import { NCMGET } from "../core/index.js";
+import type { SongData } from "../core/types.js";
+import { printSongList } from "../utils/Display.js";
 
-interface MusicItem {
-  id: string;
-  name: string;
-  artist: string[];
-  album: string;
-  pic_id: string;
-  pic: string;
-  url_id: string;
-  lyric_id: string;
-  lrc: string;
-  source: string;
+export function search(cmd: Command) {
+    cmd
+        .command("search")
+        .description("Search for music")
+        .argument("<keyword>", "search keyword")
+        .option(
+            "-t, --type <type>",
+            "search type: 1=song, 10=album, 100=artist, 1000=playlist",
+            "1",
+        )
+        .option("-l, --limit <limit>", "number of results", "30")
+        .option("-p, --page <page>", "page number", "1")
+        .action(action);
 }
 
-export default function search(program: Command) {
-  program
-    .command("search <search-term>")
-    .description("Search song resource.")
-    .option("-s, --server <source...>", "Specify music platform.", ["netease"])
-    .option("-a, --api <url>", "Specify API endpoint.")
-    .option("-t, --type <type>", "Search type.", "1")
-    .option("-p, --page <page>", "Page number.", "1")
-    .option("-l, --limit <limit>", "Number of results per page.", "30")
-    .action(async (searchTerm: string, options) => {
-      const { server, type, page, limit, api } = options;
+const action = async (
+    keyword: string,
+    options: { type: string; limit: string; page: string },
+) => {
+    const ncm = new NCMGET();
 
-      try {
-        const results = await Promise.all(server.map(async (srv: string) => {
-          const meting = new Meting(srv);
-          meting.format(true);
-          if (api) {
-            meting.api(api);
-          }
-          const result = await meting.search(searchTerm, {
-            type: parseInt(type, 10),
-            page: parseInt(page, 10),
-            limit: parseInt(limit, 10),
-          });
-          return JSON.parse(result) as MusicItem[];
-        }));
+    try {
+        const result = await ncm.search(keyword, {
+            type: Number(options.type),
+            limit: Number(options.limit),
+            page: Number(options.page),
+        });
 
-        const data = results.flat();
+        const songs: SongData[] = JSON.parse(result);
 
-        if (!data || data.length === 0) {
-          console.error(
-            styleText(["bold", "red"], "error: ") + "No results found.",
-          );
-          return;
+        if (songs.length === 0) {
+            console.log(
+                styleText("yellow", `No results found for: ${keyword}`),
+            );
+            return;
         }
 
-        for (const music of data) {
-          console.log(
-            styleText(["bold", "blue"], ` ${music.source}|${music.id} \t`) +
-              styleText(["bold", "bgGray"], ` ${music.name} `) +
-              styleText("gray", ` ${music.artist.join(", ")} `),
-          );
-        }
-      } catch (error) {
-        const errorMessage = error instanceof Error
-          ? error.message
-          : String(error);
-        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
-      }
-    });
-}
+        printSongList(songs, {
+            title: `Search results for "${keyword}" (${songs.length} songs):`,
+        });
+    } catch (error) {
+        const msg = error instanceof Error ? error.message : String(error);
+        console.log(styleText("red", `Search failed: ${msg}`));
+    }
+};

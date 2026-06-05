@@ -1,115 +1,53 @@
-import Meting from "../core/meting";
-import { styleText, promisify } from "util";
 import { Command } from "commander";
-import { exec } from "child_process";
+import { styleText } from "node:util";
+import { NCMGET } from "../core/index.js";
+import type { SongData, UrlData } from "../core/types.js";
+import { openBrowser } from "../utils/OpenBrowser.js";
 
-const execAsync = promisify(exec);
+export function preview(cmd: Command) {
+    cmd
+        .command("preview <id>")
+        .description("Preview song in browser")
+        .action(async (id: string) => {
+            const ncm = new NCMGET();
 
-interface MusicItem {
-  id: string;
-  name: string;
-  artist: string[];
-  album: string;
-  pic_id: string;
-  url_id: string;
-  lyric_id: string;
-  source: string;
-}
+            try {
+                const songRaw = await ncm.song(id);
+                const songs: SongData[] = JSON.parse(songRaw);
 
-export default function preview(program: Command) {
-  program
-    .command("preview <song-id>")
-    .description("Open the web to preview music.")
-    .option("-s, --server <source>", "Specify music platform.", "netease")
-    .option("-a, --api <url>", "Specify API endpoint.")
-    .action(async (songId: string, options) => {
-      const { server, api } = options;
-      const meting = new Meting(server);
-      meting.format(true);
-      if (api) {
-        meting.api(api);
-      }
+                if (songs.length === 0) {
+                    console.error(
+                        styleText(["bold", "red"], "error: ") +
+                            "No song found.",
+                    );
+                    return;
+                }
 
-      try {
-        const dataStr = await meting.song(songId);
-        const data: MusicItem[] = JSON.parse(dataStr);
+                const song = songs[0];
+                const urlRaw = await ncm.url(song.url_id);
+                const urlData: UrlData = JSON.parse(urlRaw);
 
-        if (!data || data.length === 0) {
-          console.error(
-            styleText(["bold", "red"], "error: ") + "No song found.",
-          );
-          return;
-        }
+                if (!urlData.url) {
+                    console.error(
+                        styleText(["bold", "red"], "error: ") +
+                            "No streaming URL available.",
+                    );
+                    return;
+                }
 
-        const music = data[0];
-        const musicUrl = music.url_id;
+                console.log(
+                    styleText(["bold", "green"], "Opening: ") +
+                        `${song.name} - ${song.artist.join(", ")}`,
+                );
 
-        if (!musicUrl) {
-          console.error(
-            styleText(["bold", "red"], "error: ") +
-              "No streaming URL available.",
-          );
-          return;
-        }
-
-        console.log(
-          styleText(["bold", "green"], "Opening: ") +
-            `${music.name} - ${music.artist.join(", ")}`,
-        );
-
-        const openBrowser = async (url: string) => {
-          let parsedUrl: URL;
-          try {
-            parsedUrl = new URL(url);
-          } catch {
-            console.error(styleText(["bold", "red"], "Invalid URL."));
-            process.exit(1);
-            return;
-          }
-
-          if (
-            parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:"
-          ) {
-            console.error(
-              styleText(["bold", "red"], "Only http/https URLs are allowed."),
-            );
-            process.exit(1);
-          }
-
-          const safeUrl = parsedUrl.toString();
-          const platform = process.platform;
-          let command: string;
-
-          switch (platform) {
-            case "win32":
-              command = `start "" "${safeUrl.replace(/"/g, "")}"`;
-              break;
-            case "darwin":
-              command = `open "${safeUrl.replace(/"/g, "")}"`;
-              break;
-            default:
-              command = `xdg-open "${safeUrl.replace(/"/g, "")}"`;
-          }
-
-          try {
-            await execAsync(command);
-          } catch (error) {
-            console.error(
-              styleText(
-                ["bold", "red"],
-                `Failed to open URL in the default browser.`,
-              ),
-            );
-            process.exit(1);
-          }
-        };
-
-        openBrowser(musicUrl);
-      } catch (error) {
-        const errorMessage = error instanceof Error
-          ? error.message
-          : String(error);
-        console.error(styleText(["bold", "red"], "error: ") + errorMessage);
-      }
-    });
+                await openBrowser(urlData.url);
+            } catch (error) {
+                const msg = error instanceof Error
+                    ? error.message
+                    : String(error);
+                console.error(
+                    styleText(["bold", "red"], "error: ") + msg,
+                );
+            }
+        });
 }

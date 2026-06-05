@@ -6,25 +6,25 @@ import { pluginTwoslash } from "@rspress/plugin-twoslash";
 const isDeployWithBase = process.env.DEPLOY_WITH_BASE === "true";
 
 export default defineConfig({
-  title: "Music Getter",
-  base: isDeployWithBase ? "/music-getter/" : "/",
+  title: "NCMGET",
+  base: isDeployWithBase ? "/ncmget/" : "/",
   icon: "/favicon.webp",
   logo: "/logo.webp",
-  logoText: "Music Getter",
+  logoText: "NCMGET",
   lang: "en",
   locales: [
     {
       lang: "en",
       label: "English",
-      title: "Music Getter",
+      title: "NCMGET - NetEase Cloud Music Getter",
       description:
-        "A music resource acquisition tool that supports the Meting API.",
+        "A lightweight and powerful cli tool for NetEase Cloud Music.",
     },
     {
       lang: "zh",
       label: "简体中文",
-      title: "Music Getter",
-      description: "一个支持 Meting API 的音乐资源获取工具。",
+      title: "NCMGET - 网易云音乐获取工具",
+      description: "一个轻量且强大的网易云音乐命令行工具。",
     },
   ],
   themeConfig: {
@@ -32,18 +32,18 @@ export default defineConfig({
       {
         icon: "github",
         mode: "link",
-        content: "https://github.com/Roy-Jin/music-getter",
+        content: "https://github.com/Roy-Jin/ncmget",
       },
       {
         icon: "npm",
         mode: "link",
-        content: "https://www.npmjs.com/package/music-getter",
+        content: "https://www.npmjs.com/package/ncmget",
       },
     ],
   },
   plugins: [
     pluginSitemap({
-      siteUrl: "https://roy-jin.github.io/music-getter/",
+      siteUrl: "https://roy-jin.github.io/ncmget/",
     }),
     pluginLlms(),
     pluginTwoslash(),

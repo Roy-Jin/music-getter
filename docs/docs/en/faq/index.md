@@ -1,86 +1,95 @@
 # FAQ
 
-## How do I get a song/playlist ID?
+## How do I get a song ID?
 
-### NetEase Cloud Music
+You can find song IDs using the `search` command:
 
-Open the NetEase Cloud Music website. The number in the song or playlist URL is the ID.
-
-- **Song**: `https://music.163.com/song?id=1372188635` → ID: `1372188635`
-- **Playlist**: `https://music.163.com/playlist?id=7697114803` → ID: `7697114803`
-
-## What to do if download fails?
-
-### Check Network Connection
-
-Make sure your network can access the Meting API normally.
-
-### Try a Custom API
-
-If the default API is unavailable, you can try using another Meting API service:
-
-```sh
-mg song 1372188635 --api https://your-api.example.com/meting/
+```bash
+ncmget search "song name"
 ```
 
-### Check Song ID
+Each result displays the song ID. You can also find IDs in the URL when browsing NetEase Cloud Music on the web — the number in the URL (e.g., `https://music.163.com/#/song?id=3374579108`) is the song ID.
 
-Confirm that the song ID is correct. You can use the `search` command first to verify.
+## Why does a download fail?
 
-## How to download high-quality music?
+Downloads may fail for several reasons:
 
-Use the `--bitrate` parameter to specify the bitrate:
+- **Copyright restrictions**: The song is not available for download in your region
+- **Network issues**: Temporary connectivity problems
+- **Invalid ID**: The song ID does not exist
 
-```sh
-mg song 1372188635 --bitrate 320
-```
+NCMGET retries failed requests 3 times automatically. If the download still fails, try again later or check if the song is available on the NetEase Cloud Music platform.
 
-Available bitrate options: `128` (standard), `192` (medium), `320` (high quality).
+## What about copyright-restricted songs?
 
-Note: The actual quality depends on the resources provided by the music platform. Not all songs have a 320kbps version.
+Some songs are restricted due to copyright and cannot be downloaded. This is a platform limitation, not a bug in NCMGET. You may be able to access restricted content by providing a valid cookie for an authenticated account.
+
+## What audio quality is available?
+
+NCMGET supports the following bitrates via the `url` method or the HTTP server:
+
+- `128` — Standard quality (128kbps)
+- `192` — Medium quality (192kbps)
+- `320` — High quality (320kbps, default)
+- `999` — Lossless quality (FLAC, requires authentication)
+
+Higher quality may require a premium NetEase Cloud Music account.
 
 ## Where are downloaded files saved?
 
-Files are saved in the current working directory by default. You can specify a directory using the `--output` or `-o` option:
+By default, files are saved in the current working directory (`./`). Use the `-o, --output` option to specify a different directory:
 
-```sh
-mg song 1372188635 --output ./my-music
+```bash
+ncmget song 3374579108 -o ~/Music
 ```
 
 ## How are special characters in filenames handled?
 
-The tool automatically handles illegal characters in filenames by replacing characters like `<>:"/\|?*` with underscores `_` to ensure filesystem compatibility.
+Characters that are illegal in filenames (`<>:"/\|?*`) are automatically replaced with `_`. For example, a song named `情绪缓冲区溢出: 世界` becomes `情绪缓冲区溢出_ 世界`.
 
-## How to search multiple platforms simultaneously?
+You can also customize the filename format using the `-f, --format` option. See [Filename Format](/filename-format) for details.
 
-Use the `--server` parameter to specify platforms:
+## Can I download multiple songs at once?
 
-```sh
-mg search "Daylight" --server netease
+Yes. Pass multiple IDs separated by spaces:
+
+```bash
+ncmget song 3374579108 111111 222222
 ```
 
-## How to update to the latest version?
+You can also download entire albums or playlists:
 
-```sh
-npm update -g music-getter
+```bash
+ncmget album 372893716
+ncmget playlist 7697114803
 ```
 
-Or reinstall:
+## How do I update NCMGET?
 
-```sh
-npm install -g music-getter@latest
+Update NCMGET to the latest version:
+
+```bash
+npm update -g ncmget
 ```
 
-## How to uninstall?
+Check your current version:
 
-```sh
-npm uninstall -g music-getter
+```bash
+ncmget -v
 ```
 
-## Are other music platforms supported?
+## How do I uninstall NCMGET?
 
-Currently supports NetEase Cloud Music and other platforms. More platform support may be added in the future based on demand.
+```bash
+npm uninstall -g ncmget
+```
 
-## Found a bug or have a feature request?
+## How do I report a bug?
 
-Feel free to submit feedback on [GitHub Issues](https://github.com/Roy-Jin/music-getter/issues).
+Please open an issue on the [GitHub repository](https://github.com/Roy-Jin/ncmget/issues). Include:
+
+- NCMGET version (`ncmget -v`)
+- Node.js version (`node -v`)
+- The command you ran
+- The error message or unexpected behavior
+- Steps to reproduce the issue

@@ -1,14 +1,14 @@
 {
-  "name": "music-getter",
-  "version": "1.2.3-beta",
-  "description": "A music resource acquisition tool that supports the Meting API.",
+  "name": "ncmget",
+  "version": "0.1.0",
+  "description": "A lightweight and powerful cli tool for NetEase Cloud Music Getter.",
   "author": "Roy-Jin",
   "license": "MIT",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "music-getter": "dist/bin/cli.js",
-    "mg": "dist/bin/cli.js"
+    "ncmget": "dist/bin/cli.js"
   },
   "files": [
     "dist"
@@ -19,37 +19,41 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/bin/cli.js",
-    "dev": "tsx src/bin/cli.ts",
+    "dev": "tsx watch src/bin/cli.ts",
+    "docs:dev": "pnpm -F docs run dev",
+    "docs:build": "pnpm -F docs run build",
+    "docs:preview": "pnpm -F docs run preview",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "music",
-    "getter",
-    "command line",
-    "tool",
-    "download",
+    "ncm",
     "netease",
-    "cli"
+    "getter",
+    "download",
+    "cli",
+    "tool"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Roy-Jin/music-getter.git"
+    "url": "git+https://github.com/Roy-Jin/ncmget.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "provenance": true
   },
   "dependencies": {
+    "@hono/node-server": "^2.0.4",
     "cli-progress": "^3.12.0",
-    "commander": "^14.0.3"
+    "commander": "^14.0.3",
+    "hono": "^4.12.23"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.11.6",
-    "@types/node": "^20.19.41",
-    "tsx": "^4.21.0",
+    "@types/node": "^25.9.1",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   },
   "bugs": {
-    "url": "https://github.com/Roy-Jin/music-getter/issues"
+    "url": "https://github.com/Roy-Jin/ncmget/issues"
   }
 }

@@ -1,14 +1,14 @@
 {
-  "quickStart": {
-    "en": "Quick Start",
-    "zh": "快速开始"
+  "core": {
+    "en": "Core",
+    "zh": "Core"
   },
-  "usageGuide": {
-    "en": "Usage Guide",
-    "zh": "使用指南"
+  "faq": {
+    "en": "FAQ",
+    "zh": "常见问题"
   },
-  "advanced": {
-    "en": "Advanced",
-    "zh": "进阶用法"
+  "commands": {
+    "en": "Commands",
+    "zh": "命令"
   }
 }

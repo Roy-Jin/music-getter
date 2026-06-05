@@ -1,3 +1,9 @@
-export { default as Meting } from "./core/meting";
-export { default as download } from "./core/download";
-export type { Music, MusicResponse, SearchOptions } from "./core/meting";
+export { NCMGET } from "./core/index.js";
+export type {
+  ApiConfig,
+  Headers,
+  LrcData,
+  SearchOption,
+  SongData,
+  UrlData,
+} from "./core/types.js";

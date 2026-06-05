@@ -1,43 +1,45 @@
 ---
 pageType: home
-
 hero:
-  name: Music Getter
-  text: Music Resource Acquisition Tool
-  tagline: A CLI tool based on Meting API for multi-platform music search and download
-  actions:
-    - theme: brand
-      text: Quick Start
-      link: /guide/start/introduction
-    - theme: alt
-      text: View on GitHub
-      link: https://github.com/Roy-Jin/music-getter
+  name: NCMGET
+  text: NetEase Cloud Music Getter
+  tagline: A lightweight, powerful, and type-safe cli tool for NetEase Cloud Music — search, download, and serve.
   image:
     src: /logo.webp
-    alt: Logo
+    alt: NCMGET Logo
+  actions:
+    - text: Get Started
+      link: /introduction
+      theme: brand
+    - text: Core API
+      link: /core/introduction
+      theme: alt
+    - text: GitHub
+      link: https://github.com/Roy-Jin/ncmget
+      theme: alt
 features:
-  - title: Multi-Platform
-    details: Supports NetEase Cloud Music and other platforms, easily access music resources from different platforms.
-    icon: 🎶
-    link: /guide/start/introduction
-  - title: Flexible Search
-    details: Cross-platform search with flexible control over type, pagination, and result count.
-    icon: 🔍
-    link: /guide/usage/search
-  - title: Batch Download
-    details: Download entire playlists with one command, supporting custom output directory and bitrate.
-    icon: 📦
-    link: /guide/usage/playlist
-  - title: Lyrics & Covers
-    details: Optionally download LRC lyrics files and cover images to enrich your music collection.
-    icon: 📝
-    link: /guide/usage/song
-  - title: Programmatic API
-    details: Provides a complete Node.js API for integration into your own projects.
-    icon: 🔌
-    link: /api/
-  - title: Online Preview
-    details: Preview songs directly in your browser before deciding to download.
-    icon: 🌐
-    link: /guide/usage/preview
+  - icon: 🎵
+    title: Core API
+    details: Complete programmatic API with NCMGET class — search, song, album, artist, playlist, url, lrc, pic. Full TypeScript support with exported types.
+    link: /core/introduction
+  - icon: 💻
+    title: 9 Commands
+    details: ncmget serve, search, song, album, playlist, lrc, pic, info, preview — everything you need from the terminal.
+    link: /introduction
+  - icon: 🌐
+    title: HTTP Server
+    details: Built-in REST API server powered by Hono. CORS-enabled, per-request isolation, cookie and raw mode support.
+    link: /core/server
+  - icon: 🔐
+    title: EAPI Encryption
+    details: Native NetEase Cloud Music EAPI encryption with AES-128-ECB. Seamless API access without reverse engineering.
+    link: /core/advanced
+  - icon: 📥
+    title: Download Manager
+    details: Queue-based download with streaming, progress bars, auto-retry, filename templating, and illegal character sanitization.
+    link: /best-practices
+  - icon: 📝
+    title: Type Safe
+    details: SongData, UrlData, LrcData, SearchOption — full TypeScript definitions exported and ready to use.
+    link: /core/types
 ---

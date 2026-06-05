@@ -1,0 +1,9 @@
+[
+  "introduction",
+  "installation",
+  { "type": "dir", "name": "commands", "label": "Commands" },
+  "filename-format",
+  "best-practices",
+  { "type": "dir", "name": "core", "label": "Core" },
+  { "type": "dir", "name": "faq", "label": "FAQ" }
+]
