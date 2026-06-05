@@ -27,7 +27,10 @@
 
 ## 文档
 
-详细文档，请移至 [**文档**](https://roy-jin.github.io/ncmget).
+详细文档，请移至  
+- [**文档(GH Pages)**](https://roy-jin.github.io/ncmget/zh/).  
+- [**文档(CF Pages)**](https://ncmget.pages.dev/zh/).  
+- [**文档(Netlify)**](https://ncmget.netlify.app/zh/).  
 
 ## 快速开始
 

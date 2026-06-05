@@ -27,7 +27,10 @@
 
 ## Documentation
 
-Detailed documentation, please refer to [**Documentation**](https://roy-jin.github.io/ncmget).
+Detailed documentation, please refer to  
+- [**Documentation(GH Pages)**](https://roy-jin.github.io/ncmget).  
+- [**Documentation(CF Pages)**](https://ncmget.pages.dev/).  
+- [**Documentation(Netlify)**](https://ncmget.netlify.app/).
 
 ## Quick Start
 

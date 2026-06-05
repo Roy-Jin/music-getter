@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- **Node.js** >= 20
+- **Node.js** >= 22.12.0
 
 Verify your Node.js version:
 
