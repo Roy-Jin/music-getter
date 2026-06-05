@@ -1,4 +1,4 @@
-# HTTP Server Mode
+# HTTP Server
 
 NCMGET includes a built-in HTTP server powered by [Hono](https://hono.dev/), allowing you to access NCMGET's functionality via REST API endpoints.
 

@@ -1,6 +1,6 @@
 # Introduction
 
-NCMGET is a full-featured command line interface for NetEase Cloud Music. It provides 9 commands for searching, downloading, and viewing music resources directly from the terminal.
+NCMGET is a full-featured command line interface for NetEase Cloud Music. It provides commands for searching, downloading, and viewing music resources directly from the terminal.
 
 ## Global Options
 

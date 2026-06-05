@@ -88,7 +88,6 @@ When `format` mode is disabled (via `.format(false)`), the raw API response is r
 
 ## Next Steps
 
-- [API Reference](./api-reference) — Complete method documentation
-- [Types](./types) — TypeScript type definitions
-- [HTTP Server](./server) — Use NCMGET as a REST API
-- [Advanced](./advanced) — Cookie, encryption, and error handling
+- [API Reference](/core/api-reference) — Complete method documentation
+- [Types](/core/types) — TypeScript type definitions
+- [Advanced](/core/advanced) — Cookie, encryption, and error handling

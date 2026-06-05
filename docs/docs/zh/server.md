@@ -1,4 +1,4 @@
-# HTTP 服务器模式
+# HTTP 服务器
 
 NCMGET 内置了基于 Hono 的 HTTP 服务器，可以通过 REST API 访问所有功能。
 
@@ -23,7 +23,7 @@ ncmget serve -h 127.0.0.1 -p 8080
 ncmget serve --logger
 ```
 
-更多详情请参阅 [serve 命令](/zh/commands/serve)。
+更多详情请参阅 [serve 命令](/commands/serve)。
 
 ## REST 端点
 

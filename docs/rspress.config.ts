@@ -1,7 +1,6 @@
 import { defineConfig } from "@rspress/core";
 import { pluginSitemap } from "@rspress/plugin-sitemap";
 import { pluginLlms } from "@rspress/plugin-llms";
-import { pluginTwoslash } from "@rspress/plugin-twoslash";
 
 const isDeployWithBase = process.env.DEPLOY_WITH_BASE === "true";
 
@@ -40,12 +39,14 @@ export default defineConfig({
         content: "https://www.npmjs.com/package/ncmget",
       },
     ],
+    footer: {
+      message: "© 2026-present, Roy-Jin.",
+    }
   },
   plugins: [
     pluginSitemap({
       siteUrl: "https://roy-jin.github.io/ncmget/",
     }),
     pluginLlms(),
-    pluginTwoslash(),
   ],
 });

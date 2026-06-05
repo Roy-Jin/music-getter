@@ -1,5 +1,5 @@
 [
   { "text": "Core", "link": "/core/introduction" },
-  { "text": "FAQ", "link": "/faq/" },
+  { "text": "FAQ", "link": "/faq" },
   { "text": "Issue", "link": "https://github.com/Roy-Jin/ncmget/issues" }
 ]

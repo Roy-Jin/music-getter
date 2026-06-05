@@ -84,8 +84,7 @@ const lrcData = JSON.parse(lrcResult);
 
 ## Next Steps
 
-- [Getting Started](./getting-started) — Install and use NCMGET in your project
-- [API Reference](./api-reference) — Complete method and property documentation
-- [Types](./types) — TypeScript type definitions
-- [HTTP Server](./server) — REST API server mode
-- [Advanced](./advanced) — Cookie, encryption, and error handling
+- [Getting Started](/core/getting-started) — Install and use NCMGET in your project
+- [API Reference](/core/api-reference) — Complete method and property documentation
+- [Types](/core/types) — TypeScript type definitions
+- [Advanced](/core/advanced) — Cookie, encryption, and error handling

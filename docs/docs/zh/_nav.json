@@ -1,5 +1,5 @@
 [
   { "text": "Core", "link": "/core/introduction" },
-  { "text": "常见问题", "link": "/faq/" },
+  { "text": "常见问题", "link": "/faq" },
   { "text": "反馈", "link": "https://github.com/Roy-Jin/ncmget/issues" }
 ]

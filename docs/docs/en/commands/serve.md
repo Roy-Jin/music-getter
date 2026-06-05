@@ -74,5 +74,5 @@ Once running, the following REST endpoints are available:
 | `GET /pic` | Get cover image URL |
 | `GET /` | List all routes |
 
-See [HTTP Server](/core/server) for detailed endpoint documentation.
+See [HTTP Server](/server) for detailed endpoint documentation.
 

@@ -25,6 +25,9 @@
   /* diff language */
   --shiki-token-deleted: #d32828;
   --shiki-token-inserted: #22863a;
+
+  --rp-home-background-bg: radial-gradient(42.12% 56.13% at 100% 0%, #537dff1a 0%, #fff0 100%), radial-gradient(42.01% 79.63% at 52.86% 0%, #537dff33 0%, #fff0 100%), radial-gradient(79.67% 58.09% at 0% 0%, #3ddd7833 0%, #fff0 100%), #fff;
+    --rp-home-feature-bg: linear-gradient(135deg, #fff, #f9f9f980)
 }
 
 /* Dark Mode */
@@ -45,4 +48,6 @@
   /* diff language */
   --shiki-token-deleted: #ee6d7a;
   --shiki-token-inserted: #36c47f;
+
+  --rp-home-background-bg: radial-gradient(42.12% 56.13% at 100% 0%, #0c1d48 0%, #12121200 100%), radial-gradient(55.81% 87.78% at 48.37% 0%, #000 0%, #12121200 89.55%), radial-gradient(122.65% 88.24% at 0% 0%, #3ddd7833 0%, #12121200 100%), #121212;
 }

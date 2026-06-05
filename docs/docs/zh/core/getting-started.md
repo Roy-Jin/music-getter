@@ -97,6 +97,6 @@ console.log(ncmget.raw); // 原始 HTTP 响应文本
 
 ## 下一步
 
-- [API 参考](/zh/core/api-reference) — 查看 NCMGET 类的完整方法和属性文档
-- [类型定义](/zh/core/types) — 了解所有导出的 TypeScript 类型
-- [进阶用法](/zh/core/advanced) — 学习 Cookie 配置、EAPI 加密等高级功能
+- [API 参考](/core/api-reference) — 查看 NCMGET 类的完整方法和属性文档
+- [类型定义](/core/types) — 了解所有导出的 TypeScript 类型
+- [进阶用法](/core/advanced) — 学习 Cookie 配置、EAPI 加密等高级功能

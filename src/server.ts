@@ -10,15 +10,20 @@ type Variables = {
 export function createApp(options?: { logger?: boolean }) {
   const app = new Hono<{ Variables: Variables }>();
 
+  app.use(cors());
+  app.use(
+    "/favicon.ico",
+    async (c) => {
+      return c.redirect("https://ncmget.pages.dev/favicon.webp");
+    },
+  );
   if (options?.logger) {
     app.use(logger());
   }
-
-  app.use(cors());
   app.use("*", async (c, next) => {
     const ncmget = new NCMGET();
     const cookie = c.req.header("Cookie");
-    const raw = c.req.query("raw");
+    const raw = c.req.queries().raw;
     if (cookie) ncmget.cookie(cookie);
     if (raw) ncmget.format(false);
     c.set("ncmget", ncmget);
@@ -119,7 +124,7 @@ export function createApp(options?: { logger?: boolean }) {
 
   app.all("", (c) => {
     const routes = app.routes
-      .filter((r) => r.path !== "/" && r.path !== "/*")
+      .filter((r) => !["/favicon.ico", "/*", "/"].includes(r.path))
       .map((r) => `${r.method}\t${r.path}`);
     return c.text(routes.join("\n"));
   });

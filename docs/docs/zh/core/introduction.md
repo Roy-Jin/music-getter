@@ -94,8 +94,7 @@ const { lrc, tlrc } = JSON.parse(lrcData);
 
 ## 下一步
 
-- [快速开始](/zh/core/getting-started) — 安装并运行你的第一个 NCMGET 程序
-- [API 参考](/zh/core/api-reference) — 完整的 NCMGET 类方法和属性文档
-- [类型定义](/zh/core/types) — 所有导出的 TypeScript 类型
-- [HTTP 服务器](/zh/core/server) — 使用内置 REST API 服务器
-- [进阶用法](/zh/core/advanced) — Cookie 配置、EAPI 加密、错误处理等
+- [快速开始](/core/getting-started) — 安装并运行你的第一个 NCMGET 程序
+- [API 参考](/core/api-reference) — 完整的 NCMGET 类方法和属性文档
+- [类型定义](/core/types) — 所有导出的 TypeScript 类型
+- [进阶用法](/core/advanced) — Cookie 配置、EAPI 加密、错误处理等
