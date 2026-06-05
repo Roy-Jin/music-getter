@@ -49,7 +49,7 @@ npx ncmget --help
 ncmget <command> [options]
 ```
 
-For detailed command documentation, please refer to the [Usage Guide](https://roy-jin.github.io/ncmget/guide/usage/song.html).
+For detailed documentation, please refer to the [Introduction](https://roy-jin.github.io/ncmget/introduction).
 
 ## Build from Source
 

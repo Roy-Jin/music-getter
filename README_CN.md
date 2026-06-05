@@ -3,6 +3,7 @@
 # 🎵 NCMGET
 
 **一个轻量级且功能强大的命令行界面工具，用于获取网易云音乐资源。**
+
 [![NPMX Version](https://img.shields.io/npm/v/ncmget?style=flat-square&label=npmx&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIj48cmVjdCB4PSIyLjUiIHk9IjIuNSIgd2lkdGg9IjE5IiBoZWlnaHQ9IjE5IiByeD0iMy44IiBmaWxsPSIjRkZGRkZGIi8+PHJlY3QgeD0iNi4zIiB5PSIxMy41NSIgd2lkdGg9IjMuNyIgaGVpZ2h0PSIzLjciIHJ4PSIwLjkiIGZpbGw9IiNBOUE5QTkiLz48cGF0aCBkPSJNMTUuODUgNi40NUgxOC44NUwxMi41IDE5LjJIOS41TDE1Ljg1IDYuNDVaIiBmaWxsPSIjNTU1NTU1Ii8+PC9zdmc+&logoWidth=16)](https://npmx.dev/package/ncmget)
 [![GitHub Stars](https://img.shields.io/github/stars/Roy-Jin/ncmget?style=flat-square&logo=github)](https://github.com/Roy-Jin/ncmget)
 [![MIT License](https://img.shields.io/github/license/Roy-Jin/ncmget?style=flat-square&logo=licensemit)](LICENSE)
@@ -48,7 +49,7 @@ npx ncmget --help
 ncmget <command> [options]
 ```
 
-详细命令文档参照：[使用指南](https://roy-jin.github.io/ncmget/guide/usage/song)
+详细文档参照：[使用介绍](https://roy-jin.github.io/ncmget/zh/introduction)
 
 ## 从源码构建
 
