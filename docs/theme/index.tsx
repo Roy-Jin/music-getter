@@ -13,9 +13,9 @@ function HomeLayout() {
                     style={{ width: '100%', maxWidth: 450, margin: '-1rem 0' }}
                 >
                     <PackageManagerTabs command={{
-                        npm: "npm install ncmget@latest -g",
+                        npm: "npm install -g ncmget@latest",
                         yarn: "yarn global add ncmget@latest",
-                        pnpm: "pnpm add ncmget@latest -g",
+                        pnpm: "pnpm add -g ncmget@latest",
                     }} />
                 </div>
             }
